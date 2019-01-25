@@ -7,7 +7,7 @@
 const STYLE = __m("style");
 
 // Create new instance of JDom
-const JD = new JDom([
+const F = new Flash([
     {
         id: "main",
         style: {
@@ -58,7 +58,7 @@ const JD = new JDom([
 ]);
 
 // When instance is created
-JD.then(function(scope){
+F.then(function(scope){
     
     // Get double number
     function doubleNumber(n) {
@@ -73,4 +73,4 @@ JD.then(function(scope){
 });
 
 // At the end prettify
-JD.prettify();
+F.prettify();
