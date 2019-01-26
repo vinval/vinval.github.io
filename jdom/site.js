@@ -46,7 +46,7 @@ const F = new Flash([
                         ]
                     },
                     {
-                        html: "JDom Clock",
+                        html: "Flash Clock",
                         style: {
                             fontSize: 10
                         }
