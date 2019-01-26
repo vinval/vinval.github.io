@@ -82,6 +82,7 @@ function Flash (dom, doc) {
         var domElement = null;
         try {
             domObject.map(function(elem){
+                elem.id = "id" in elem ? elem.id : randomID();
                 if (!document.getElementById(elem.id)) {
                     domElement = document.createElement(elem.tag || "div");
                     positionInDom.appendChild(domElement);
@@ -89,7 +90,6 @@ function Flash (dom, doc) {
                     domElement = document.getElementById(elem.id);
                 }
                 if (necessaryTagsCheck(elem)) {
-                    elem.id = "id" in elem ? elem.id : randomID();
                     Object.keys(elem).map(function(item){
                         try {
                             if (excludeTagsFromBuilding(item)) {
@@ -101,8 +101,8 @@ function Flash (dom, doc) {
                                 switch (item) {
                                     case "html": if (typeof elem[item] === "number") domElement.innerHTML = elem[item]; else domElement.innerHTML = domEvaluateString(elem[item], elem); break;
                                     case "hover": cssPseudo (domElement, elem, "hover"); break;
-                                    //case "focus": cssPseudo (domElement, elem, "focus"); break;
-                                    //case "active": cssPseudo (domElement, elem, "active"); break;
+                                    case "focus": cssPseudo (domElement, elem, "focus"); break;
+                                    case "active": cssPseudo (domElement, elem, "active"); break;
                                 }
                             }
                         } catch (e) {}
@@ -128,7 +128,7 @@ function Flash (dom, doc) {
     function domEvaluateString(str, domObject) {
         const regExp = /{{(.*?)}}/g;
         var matches = regExp.exec(str);
-        if (matches && str.indexOf("SELF")!==-1) str = str.replace(/SELF/g, "find('"+domObject.id+"').self");
+        if (matches && str.indexOf("SELF")!==-1) str = str.replace(/SELF/g, "find('"+domObject.id+"')");
         if (matches && str.indexOf("PARENT")!==-1) str = str.replace(/PARENT/g, "find('"+domObject.id+"').parent");
         str = str.replace(/{{/g,"").replace(/}}/g,"");            
         matches = regExp.exec(str);
