@@ -72,5 +72,10 @@ F.then(function(scope){
     },5)
 });
 
+//Changing initial assets like document title and if you prefer the style
+F.init({
+    title: "Flash.js"
+});
+
 // At the end prettify
 F.prettify();
